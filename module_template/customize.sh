@@ -16,14 +16,13 @@ fi
 if [ "$BOOTMODE" ] && [ "$KSU" ]; then
   ui_print "- Installing from KernelSU app"
   ui_print "- KernelSU version: $KSU_KERNEL_VER_CODE (kernel) + $KSU_VER_CODE (ksud)"
+  
+  # Bagian cek versi terlalu lama tetap dipertahankan
   if ! [ "$KSU_KERNEL_VER_CODE" ] || [ "$KSU_KERNEL_VER_CODE" -lt "$MIN_KSU_VERSION" ]; then
     ui_print "! KernelSU version is too old!"
     abort "! Please update KernelSU to latest version!";
-    elif [ "$KSU_KERNEL_VER_CODE" -ge "$MAX_KSU_VERSION" ]; then
-    ui_print "! KernelSU version abnormal!"
-    ui_print "! Please integrate KernelSU into your kernel"
-    abort "as submodule instead of copying the source code.";
   fi
+
   if ! [ "$KSU_VER_CODE" ] || [ "$KSU_VER_CODE" -lt "$MIN_KSUD_VERSION" ]; then
     print_title "! ksud version is too old!" "! Please update KernelSU Manager to latest version"
     abort;
